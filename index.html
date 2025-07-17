@@ -11,10 +11,29 @@
     <h1>Admission Eligibility System</h1>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="Main Tabs">
-    <button class="tab-button active" data-tab="studentTab" role="tab" aria-selected="true" aria-controls="studentTab" id="studentTabBtn">Student</button>
-    <button class="tab-button" data-tab="adminTab" role="tab" aria-selected="false" aria-controls="adminTab" id="adminTabBtn">Admin</button>
-  </nav>
+<nav class="tab-bar" role="tablist" aria-label="Main Tabs">
+  <button 
+    class="tab-button active" 
+    data-tab="studentTab" 
+    role="tab" 
+    aria-selected="true" 
+    aria-controls="studentTab" 
+    id="studentTabBtn"
+  >
+    Student
+  </button>
+  <button 
+    class="tab-button" 
+    data-tab="adminTab" 
+    role="tab" 
+    aria-selected="false" 
+    aria-controls="adminTab" 
+    id="adminTabBtn"
+  >
+    Admin
+  </button>
+</nav>
+
 
   <main>
     <!-- Student Panel -->
@@ -80,10 +99,7 @@
 
         <button type="submit" id="checkBtn">Check Eligible Universities</button>
       </form>
-
-      <section class="search-filter">
-        <input type="search" id="searchInput" placeholder="Search universities..." aria-label="Search universities" />
-      </section>
+ 
 
       <h3>Eligible Universities:</h3>
       <ul id="resultList" aria-live="polite" aria-atomic="true"></ul>

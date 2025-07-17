@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admission System with Subject-wise Marks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Admission Eligibility System</h1>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Main Tabs">
+    <button class="tab-button active" data-tab="studentTab" role="tab" aria-selected="true" aria-controls="studentTab" id="studentTabBtn">Student</button>
+    <button class="tab-button" data-tab="adminTab" role="tab" aria-selected="false" aria-controls="adminTab" id="adminTabBtn">Admin</button>
+  </nav>
+
+  <main>
+    <!-- Student Panel -->
+    <section id="studentTab" class="tab-content active" role="tabpanel" aria-labelledby="studentTabBtn" tabindex="0">
+      <h2>Student Admission Eligibility Checker</h2>
+
+      <form id="studentForm" aria-label="Student Eligibility Form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sscGpa">SSC GPA (out of 5)</label>
+            <input type="number" id="sscGpa" name="sscGpa" min="0" step="0.01" max="5" required />
+          </div>
+          <div class="form-group">
+            <label for="sscYear">SSC Exam Year</label>
+            <select id="sscYear" name="sscYear" required></select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="hscGpa">HSC GPA (out of 5)</label>
+            <input type="number" id="hscGpa" name="hscGpa"  min="0" step="0.01" max="5" required />
+          </div>
+          <div class="form-group">
+            <label for="hscYear">HSC Exam Year</label>
+            <select id="hscYear" name="hscYear" required></select>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>Subject Marks (out of 100)</legend>
+          <div class="flex-wrap">
+            <div class="form-group">
+              <label for="bangla">Bangla</label>
+              <input type="number" id="bangla" name="bangla" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="english">English</label>
+              <input type="number" id="english" name="english" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="ict">ICT</label>
+              <input type="number" id="ict" name="ict" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="physics">Physics</label>
+              <input type="number" id="physics" name="physics" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="chemistry">Chemistry</label>
+              <input type="number" id="chemistry" name="chemistry" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="math">Math</label>
+              <input type="number" id="math" name="math" min="0" max="100" required />
+            </div>
+            <div class="form-group">
+              <label for="biology">Biology</label>
+              <input type="number" id="biology" name="biology" min="0" max="100" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <button type="submit" id="checkBtn">Check Eligible Universities</button>
+      </form>
+
+      <section class="search-filter">
+        <input type="search" id="searchInput" placeholder="Search universities..." aria-label="Search universities" />
+      </section>
+
+      <h3>Eligible Universities:</h3>
+      <ul id="resultList" aria-live="polite" aria-atomic="true"></ul>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="adminTab" class="tab-content" role="tabpanel" aria-labelledby="adminTabBtn" tabindex="0" hidden>
+      <h2>Admin Login</h2>
+      <div id="adminLoginForm" style="max-width: 400px; margin-bottom: 30px;">
+        <div class="form-group" style="flex: 1 1 100%; margin-bottom: 15px;">
+          <label for="adminUser">Username</label>
+          <input type="text" id="adminUser" name="adminUser" required autocomplete="username" />
+        </div>
+        <div class="form-group" style="flex: 1 1 100%; margin-bottom: 15px;">
+          <label for="adminPass">Password</label>
+          <input type="password" id="adminPass" name="adminPass" required autocomplete="current-password" />
+        </div>
+        <button id="loginBtn" style="max-width: 150px;">Login</button>
+        <p id="loginError" class="error" role="alert" aria-live="assertive"></p>
+      </div>
+
+      <div id="adminPanel" hidden>
+        <h2>Manage Universities</h2>
+        <form id="universityForm" aria-label="Add University Form" style="max-width: 900px;">
+          <div class="form-group" style="flex: 1 1 100%; margin-bottom: 15px;">
+            <label for="name">University Name</label>
+            <input type="text" id="name" name="name" required autocomplete="organization" />
+          </div>
+
+          <div class="flex-wrap" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label for="ssc">Min SSC GPA</label>
+              <input type="number" id="ssc" name="ssc" step="0.01" min="0" max="5" required />
+            </div>
+            <div class="form-group">
+              <label for="sscMinYear">Min SSC Year</label>
+              <select id="adminsscYearMin" name="sscYear" required></select>
+            </div>
+            <div class="form-group">
+              <label for="sscMaxYear">Max SSC Year</label>
+              <select id="adminsscYearMax" name="sscYear" required></select>
+            </div>
+          </div>
+
+          <div class="flex-wrap" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label for="hsc">Min HSC GPA</label>
+              <input type="number" id="hsc" name="hsc" min="0" max="5" required />
+            </div>
+            <div class="form-group">
+              <label for="hscMinYear">Min HSC Year</label>
+              <select id="adminhscYearMin" name="sscYear" required></select>
+            </div>
+            <div class="form-group">
+              <label for="hscMaxYear">Max HSC Year</label>
+             <select id="adminhscYearMax" name="sscYear" required></select>
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Minimum Subject Marks (out of 100)</legend>
+            <div class="flex-wrap">
+              <div class="form-group">
+                <label for="minBangla">Bangla</label>
+                <input type="number" id="minBangla" name="minBangla" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minEnglish">English</label>
+                <input type="number" id="minEnglish" name="minEnglish" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minIct">ICT</label>
+                <input type="number" id="minIct" name="minIct" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minPhysics">Physics</label>
+                <input type="number" id="minPhysics" name="minPhysics" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minChemistry">Chemistry</label>
+                <input type="number" id="minChemistry" name="minChemistry" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minMath">Math</label>
+                <input type="number" id="minMath" name="minMath" min="0" max="100" required />
+              </div>
+              <div class="form-group">
+                <label for="minBiology">Biology</label>
+                <input type="number" id="minBiology" name="minBiology" min="0" max="100" required />
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="flex-wrap" style="margin-top: 15px; gap: 15px;">
+            <div class="form-group" style="flex: 1 1 60%;">
+              <label for="website">University Website URL (optional)</label>
+              <input type="url" id="website" name="website" placeholder="https://example.com" />
+            </div>
+            <div class="form-group" style="flex: 1 1 35%;">
+              <label for="location">Location (City/District)</label>
+              <input type="text" id="location" name="location" />
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px;">
+            <label for="logo">Logo Image URL (optional)</label>
+            <input type="url" id="logo" name="logo" placeholder="https://example.com/logo.png" />
+          </div>
+
+          <button type="submit" id="addUniBtn">Add University</button>
+        </form>
+
+        <table id="universityTable" border="1" aria-label="University List" role="grid" style="width:100%; margin-top: 30px; border-collapse: collapse;">
+          <thead>
+            <tr role="row">
+              <th role="columnheader">Name</th>
+              <th role="columnheader">Logo</th>
+              <th role="columnheader">Location</th>
+              <th role="columnheader">SSC GPA (Year Range)</th>
+              <th role="columnheader">HSC GPA (Year Range)</th>
+              <th role="columnheader">Min Subject Marks</th>
+              <th role="columnheader">Website</th>
+              <th role="columnheader">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="universityTableBody" role="rowgroup"></tbody>
+        </table>
+
+        <div style="display: flex; gap: 20px; justify-content: center; max-width: 900px; margin: 40px auto 0 auto;">
+          <button id="exportCsvBtn" class="logout">Export CSV</button>
+          <button id="logoutBtn" class="logout">Logout</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-auth.js"></script>
+  <script type="module" src="admin.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
